@@ -27,6 +27,7 @@ kind: Service
 metadata:
   name: cloud-gateway-svc
 spec:
+  type: LoadBalancer
   ports:
     - port: 80
       targetPort: 9100
