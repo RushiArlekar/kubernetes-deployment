@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: library
+  labels:
+    app: library-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: library-app
+  template:
+    metadata:
+      labels:
+        app: library-app
+    spec:
+      containers:
+        - name: library
+          image: rushiarlekar292/library-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8091
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: library-service-svc
+spec:
+  ports:
+    - port: 80
+      targetPort: 8091
+      protocol: TCP
+  selector:
+    app: library-app
